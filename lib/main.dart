@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
     '0' , '.' , 'ANS' , '=' ,
   ];
 
+  //to check whether it is an operator or not
   bool isOperator(String x){
     if(x=='/' || x=='*' || x=='-' || x=='+' || x=='%' || x=='='){
       return true;
@@ -47,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  //to find the solution of user expression
   void evaluate(){
     String str = expression;
     Parser p = Parser();
@@ -69,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-
+                    //user input expression
                     padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                     alignment: Alignment.centerRight,
                     child: SingleChildScrollView(
@@ -92,7 +94,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
+
                   Container(
+                    //Solution of expression
                     padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                     alignment: Alignment.centerRight,
                     child: SingleChildScrollView(
@@ -121,10 +125,13 @@ class _HomePageState extends State<HomePage> {
               child: Container(
 
                 child: GridView.builder(
+                  //grid view of buttons
                     itemCount: buttons.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
                     itemBuilder: (BuildContext context, int index){
+
                       if(index==0){
+                        //for AC button
                         return Button(
                           buttonTapped: (){
                             setState(() {
@@ -137,7 +144,9 @@ class _HomePageState extends State<HomePage> {
                           textColor: Colors.white,
                         );
                       }
+
                       else if(index ==1){
+                        //for DEL button
                         return Button(
                           buttonTapped: (){
                             setState(() {
@@ -149,7 +158,9 @@ class _HomePageState extends State<HomePage> {
                           textColor: Colors.white,
                         );
                       }
+
                       else if(index==buttons.length-1){
+                        //for = button
                         return Button(
                           buttonTapped: (){
                             setState(() {
@@ -161,7 +172,9 @@ class _HomePageState extends State<HomePage> {
                           textColor: Colors.white,
                         );
                       }
+
                       else if(index==buttons.length-2){
+                        //for ANS button
                         return Button(
                           buttonTapped: (){
                             setState(() {
@@ -173,6 +186,7 @@ class _HomePageState extends State<HomePage> {
                           textColor: Colors.blueGrey[300],
                         );
                       }
+
                       else{
                         return Button(
                           buttonTapped: (){
