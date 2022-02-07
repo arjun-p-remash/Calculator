@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'buttons.dart';
 import 'package:math_expressions/math_expressions.dart';
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     '7' , '8' , '9' , '*' ,
     '4' , '5' , '3' , '-' ,
     '1' , '2' , '3' , '+' ,
-    '0' , '.' , '' , '=' ,
+    '0' , '.' , 'ANS' , '=' ,
   ];
 
   bool isOperator(String x){
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[500],
+      backgroundColor: Colors.grey[900],
       body: Column(
         children: [
           Expanded(
@@ -69,41 +70,48 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Container(
 
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                     alignment: Alignment.centerRight,
-                    child: Text(
-                      expression,style: const TextStyle(
-                        shadows: <Shadow>[
-                          Shadow(
-                            offset: Offset(2.0, 2.0),
-                            blurRadius: 5.0,
-                            color: Colors.white70,
-                          ),
-                        ],
-                      //color: Colors.white,
-                        fontSize: 55,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 3,
-                    ),
+                    child: SingleChildScrollView(
+                      reverse: true,
+                      scrollDirection: Axis.horizontal,
+                      child: Text(
+                        expression,style: const TextStyle(
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(3.0, 2.0),
+                              blurRadius: 10.0,
+                              color: Colors.black,
+                            ),
+                          ],
+                        color: Colors.white,
+                          fontSize: 55,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 3,
+                      ),
+                      ),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                     alignment: Alignment.centerRight,
-                    child: Text(answer,
-                    style: const TextStyle(
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(2.0, 2.0),
-                          blurRadius: 5.0,
-                          color: Colors.white70,
-                        ),
-                      ],
-                      //color: Colors.white,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Text(answer,
+                      style: const TextStyle(
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(3.0, 2.0),
+                            blurRadius: 10.0,
+                            color: Colors.black,
+                          ),
+                        ],
+                        color: Colors.white,
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
 
-                    ),),
+                      ),),
+                    ),
                   )
                 ],
               )
@@ -125,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                           buttonText: buttons[index],
-                          color: Colors.orangeAccent,
+                          color: Colors.orangeAccent[700],
                           textColor: Colors.white,
                         );
                       }
@@ -149,8 +157,20 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                           buttonText: buttons[index],
-                          color: Colors.green,
+                          color: Colors.green[900],
                           textColor: Colors.white,
+                        );
+                      }
+                      else if(index==buttons.length-2){
+                        return Button(
+                          buttonTapped: (){
+                            setState(() {
+                              expression+=answer;
+                            });
+                          },
+                          buttonText: buttons[index],
+                          color: Colors.black54,
+                          textColor: Colors.blueGrey[300],
                         );
                       }
                       else{
@@ -161,8 +181,8 @@ class _HomePageState extends State<HomePage> {
                             });
                           },
                           buttonText: buttons[index],
-                          color: isOperator(buttons[index])? Colors.blueGrey[800] : Colors.white,
-                          textColor: isOperator(buttons[index])? Colors.white : Colors.blueGrey[800],
+                          color: isOperator(buttons[index])? Colors.black : Colors.black54,
+                          textColor: isOperator(buttons[index])? Colors.white : Colors.blueGrey[300],
                         );
                       }
                     }),
